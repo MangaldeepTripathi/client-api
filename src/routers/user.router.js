@@ -1,7 +1,7 @@
 const express = require('express')
 const router = express.Router();
-const { insertUser } = require("../model/user/User.model");
-const { hashPassword } = require("../helpers/bcrypt.helper")
+const { insertUser, getUserByEmail } = require("../model/user/User.model");
+const { hashPassword,comparePassword } = require("../helpers/bcrypt.helper")
 router.all("/", (req, res, next) => {
     // console.log(name)
     //res.json({message:"return from user router"})
@@ -28,5 +28,27 @@ router.post("/", async (req, res) => {
         res.json({ status: "error", message: error.message });
     }
 
+})
+
+// Create sign in user route
+
+router.post("/login", async (req, res) => {
+    console.log(req.body);
+    const {email, password}= req.body;
+    if (!email || !password) {
+		return res.json({ status: "error", message: "Invalid form submition!" });
+	}
+    const user = await getUserByEmail(email);
+    const passFromDb = user && user._id ? user.password : null;
+
+	if (!passFromDb)
+		return res.json({ status: "error", message: "Invalid email or password!" });
+
+    const result = await comparePassword(password, passFromDb);
+    if (!result) {
+		return res.json({ status: "error", message: "Invalid email or password!" });
+	}
+    console.log(user);
+    res.json({status:"success", message:"User loggedin successfully"}) 
 })
 module.exports = router;
