@@ -16,8 +16,8 @@
  Content-Type: application/json
 
 {
-   "email":"raj@gmail.com",
-   "password":"12345678"
+   "email":"mangaldeep272@gmail.com",
+   "password":"password1"
 }
 
 ###Get a user profile endpoint 
@@ -33,5 +33,15 @@
  Content-Type: application/json
 
 {
-   "email":"raj@gmail.com"
+   "email":"mangaldeep272@gmail.com"
+}
+
+###Update new password endpoints 
+ PATCH http://localhost:8001/v1/user/reset-password
+ Content-Type: application/json
+
+{
+   "email":"mangaldeep272@gmail.com",
+   "pin":380334,
+   "newPassword":"password1"
 }

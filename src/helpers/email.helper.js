@@ -7,6 +7,12 @@ const transporter = nodemailer.createTransport({
         user: 'emery.schneider@ethereal.email',
         pass: 'F36uZNZ9VfqWwrBcF3'
     }
+    /* host: 'smtp.gmail.com',
+    port: 465,
+    auth: {
+        user: 'mdtripathiwebs@gmail.com',
+        pass: 'tshguvyamhwdzkmf'
+    } */
 });
 
 const send = (info) => {
@@ -29,8 +35,11 @@ const send = (info) => {
     });
   };
 
-  const emailProcessor = (email, pin ) => {
-       const info = {
+  const emailProcessor = ({email, pin, type} ) => {
+    let info = "";
+    switch (type) {
+      case "request-new-password":
+       info = {
           from: '"CRM Company" <abe.kohler59@ethereal.email>', // sender address
           to: email, // list of receivers
           subject: "Password rest Pin", // Subject line
@@ -45,6 +54,39 @@ const send = (info) => {
         <p></p>`, // html body
         };
         send(info);
+        break;
+        case "update-password-success":
+      info = {
+        from: '"CMR Company" <abe.kohler59@ethereal.email>', // sender address
+        to: email, // list of receivers
+        subject: "Password updated", // Subject line
+        text: "Your new password has been update", // plain text body
+        html: `<b>Hello </b>
+       
+      <p>Your new password has been update</p>`, // html body
+      };
+
+      send(info);
+      break;
+      case "new-user-confirmation-required":
+        info = {
+          from: '"CMR Company" <abe.kohler59@ethereal.email>', // sender address
+          to: email, // list of receivers
+          subject: "Please verify your new user", // Subject line
+          text:
+            "Please follow the link to very your account before you can login", // plain text body
+          html: `<b>Hello </b>
+          <p>Please follow the link to very your account before you can login</p>
+          <p>${verificationLink}</P>
+          `, // html body
+        };
+  
+        send(info);
+        break;
+  
+      default:
+        break;
+     }
     }
   
        
