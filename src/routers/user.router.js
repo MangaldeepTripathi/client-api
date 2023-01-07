@@ -1,9 +1,11 @@
 const express = require('express')
 const router = express.Router();
 const { insertUser, getUserByEmail,getUserById } = require("../model/user/User.model");
+const {setPasswordResetPin} = require("../model/reset-pin/ResetPin.model")
 const { hashPassword,comparePassword } = require("../helpers/bcrypt.helper")
 const{ createAccessJWT,createRefreshJWT}= require("../helpers/jwt.helper")
 const {userAuthorization}= require("../middleware/authorization.middleware")
+
 router.all("/", (req, res, next) => {
     // console.log(name)
     //res.json({message:"return from user router"})
@@ -67,4 +69,14 @@ router.post("/login", async (req, res) => {
         refreshJWT
     }) 
 })
+
+router.post("/reset-password", async(req, res)=>{
+    const {email}= req.body;
+    const user= await getUserByEmail(email)
+    if(user && user.id){
+     const setPin= await setPasswordResetPin(email)
+    return res.json(setPin)
+    }
+    return res.json({status:"error", message:"If the email is exist into the database, the password reset pin will be send shortly"});
+});
 module.exports = router;

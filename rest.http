@@ -27,3 +27,11 @@
 ###Get refreshed token 
  GET  http://localhost:8001/v1/tokens
  Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJhakBnbWFpbC5jb20iLCJpYXQiOjE2NzMxMDk0NDQsImV4cCI6MTY3NTcwMTQ0NH0.gVmk8Cn5065TH43t6xXZqRHHcAYm8v_N-vQm1ivROrM
+
+###Password reset endpoints 
+ POST http://localhost:8001/v1/user/reset-password
+ Content-Type: application/json
+
+{
+   "email":"raj@gmail.com"
+}
