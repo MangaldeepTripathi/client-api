@@ -23,3 +23,7 @@
 ###Get a user profile endpoint 
  GET http://localhost:8001/v1/user
  Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJhakBnbWFpbC5jb20iLCJpYXQiOjE2NzI5NTA2NzgsImV4cCI6MTY3Mjk1MTU3OH0.H7QwkRlTCFs45eVptzExER6i6-bQnrOkG5Akiof-7d4
+
+###Get refreshed token 
+ GET  http://localhost:8001/v1/tokens
+ Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJhakBnbWFpbC5jb20iLCJpYXQiOjE2NzMxMDk0NDQsImV4cCI6MTY3NTcwMTQ0NH0.gVmk8Cn5065TH43t6xXZqRHHcAYm8v_N-vQm1ivROrM

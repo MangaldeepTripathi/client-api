@@ -48,9 +48,11 @@ const port = process.env.PORT || 8001;
 //Load the router
 const userRouter = require('./src/routers/user.router')
 const tickRouter = require('./src/routers/ticket.router')
+const tokenRouter = require('./src/routers/tokens.router')
 //User routers
 app.use("/v1/user", userRouter)
 app.use("/v1/ticket", tickRouter)
+app.use("/v1/tokens", tokenRouter)
 
 const handleError = require('./src/utils/errorHandler');
 //If any route is not found then put the *
