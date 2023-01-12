@@ -6,6 +6,7 @@ const { hashPassword,comparePassword } = require("../helpers/bcrypt.helper")
 const{ createAccessJWT,createRefreshJWT}= require("../helpers/jwt.helper")
 const {userAuthorization}= require("../middleware/authorization.middleware")
 const {emailProcessor}= require("../helpers/email.helper")
+const{resetPassReqValidation,updatePassValidation}= require("../middleware/formValidation.middleware")
 router.all("/", (req, res, next) => {
     // console.log(name)
     //res.json({message:"return from user router"})
@@ -70,7 +71,7 @@ router.post("/login", async (req, res) => {
     }) 
 })
 
-router.post("/reset-password", async(req, res)=>{
+router.post("/reset-password",resetPassReqValidation, async(req, res)=>{
     const {email}= req.body;
     const user= await getUserByEmail(email)
     if(user && user.id){
@@ -85,7 +86,7 @@ router.post("/reset-password", async(req, res)=>{
     return res.json({status:"error", message:"If the email is exist into the database, the password reset pin will be send shortly"});
 });
 
-router.patch("/reset-password", async(req, res)=>{
+router.patch("/reset-password", updatePassValidation, async(req, res)=>{
     const { email, pin, newPassword } = req.body;
     const getPin = await getPinByEmailPin(email, pin);
     if (getPin?._id) {
