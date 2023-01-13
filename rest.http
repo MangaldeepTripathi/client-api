@@ -17,7 +17,7 @@
 
 {
    "email":"mangaldeep272@gmail.com",
-   "password":"password1"
+   "password":"mangal@123"
 }
 
 ###Get a user profile endpoint 
@@ -45,3 +45,7 @@
    "pin":211766,
    "newPassword":"mangal@123"
 }
+
+#### user logout endpoint
+DELETE http://localhost:8001/v1/user/logout
+Authorization: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im1hbmdhbGRlZXAyNzJAZ21haWwuY29tIiwiaWF0IjoxNjczNTU0NzcyLCJleHAiOjE2NzM1NTU2NzJ9.aajtTQXdgKD91E_P9P1dalmI9R78GUHLRM2E95OSyeM
