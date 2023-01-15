@@ -19,7 +19,7 @@ const userAuthorization= async (req, res, next)=>{
         const userId= await getJWT(authorization);
         console.log("userId...",userId)
         if(!userId){
-            res.status(403).json({message:"forbidden"});
+          return  res.status(403).json({message:"forbidden"});
         }
        req.userId= userId;
       return next();

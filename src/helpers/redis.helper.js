@@ -23,6 +23,7 @@ const setJWT =  (key, value) => {
     return new Promise(async(resolve, reject) => {
       try {
         const value = await client.get(key);
+       // if(!value) reject("Forbidden")
         resolve(value);
         /* client.get(key, (err, res) => {
           if (err) reject(err);
